@@ -1,5 +1,7 @@
 # Materialist Global Emotional State (MGES)
 ## *Revolutionary AI for Class Consciousness Analysis*
+AI generated- I would call it an attempt at social science personally and am not sure how revolutionary, correct, or even novel it is. Feel free to contribute or run with it.
+TyH
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-red.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.12+](https://img.shields.io/badge/python-3.12+-red.svg)](https://www.python.org/downloads/)
@@ -10,6 +12,8 @@
 **MGES** is a sophisticated AI-powered system that applies **materialist dialectics** and **Marxist class analysis** to understand collective emotional states as products of material conditions rather than abstract psychological substrates. This represents the first working **computational model of historical materialism**.
 
 ![Consciousness Analysis Dashboard](image.png)
+
+[Repo Wiki- Analysis of USA stats and code review](https://github.com/angrysky56/Materialist_Global_Emotional_State/wiki/_new)
 
 ## 🚩 **What This System Actually Does**
 
