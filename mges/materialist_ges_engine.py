@@ -20,7 +20,7 @@ import logging
 import math
 import warnings
 from dataclasses import dataclass, field
-from datetime import UTC, datetime, timedelta, timezone
+from datetime import datetime, timedelta, timezone
 from enum import Enum
 from typing import Any
 
@@ -482,7 +482,7 @@ class MaterialistGESEngine:
             ideological_influence=material_conditions.ideological_hegemony,
             historical_momentum=historical_momentum,
             crisis_indicators=crisis_indicators,
-            timestamp=datetime.now(tz=UTC),
+            timestamp=datetime.now(tz=timezone.utc),
             region=region,
             material_conditions=material_conditions,
         )
@@ -664,7 +664,7 @@ class MaterialistGESEngine:
                 "global_revolutionary_potential": 0.0,
                 "global_crisis_intensity": 0.0,
                 "global_historical_momentum": 0.0,
-                "timestamp": datetime.now(tz=UTC),
+                "timestamp": datetime.now(tz=timezone.utc),
             }
 
         states = list(self.latest_states.values())
@@ -714,7 +714,7 @@ class MaterialistGESEngine:
             "global_crisis_intensity": global_crisis_intensity,
             "global_historical_momentum": global_historical_momentum,
             "dominant_crisis_indicators": dict(sorted(crisis_frequency.items(), key=lambda x: x[1], reverse=True)[:5]),
-            "timestamp": datetime.now(tz=UTC),
+            "timestamp": datetime.now(tz=timezone.utc),
             "analysis_confidence": np.average([s.confidence for s in states], weights=weights),
         }
 
@@ -866,7 +866,7 @@ if __name__ == "__main__":
         ideological_hegemony=0.7,
         state_repression=0.4,
         mass_media_concentration=0.8,
-        timestamp=datetime.now(tz=UTC),
+        timestamp=datetime.now(tz=timezone.utc),
         region="USA",
     )
 

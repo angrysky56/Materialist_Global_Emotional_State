@@ -18,7 +18,7 @@ import logging
 import warnings
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
-from datetime import UTC, datetime, timedelta, timezone
+from datetime import datetime, timedelta, timezone
 from enum import Enum
 from typing import Any
 
@@ -190,7 +190,7 @@ class LaborStatisticsSource(MaterialistDataSource):
                             indicator_name=indicator_name,
                             value=normalized_value,
                             confidence=0.9,  # High confidence for World Bank data
-                            timestamp=datetime.now(tz=UTC),
+                            timestamp=datetime.now(tz=timezone.utc),
                             region=self.region,
                             metadata={
                                 "source": "world_bank_api_direct",
@@ -317,7 +317,7 @@ class WealthInequalitySource(MaterialistDataSource):
                                             indicator_name=indicator_name,
                                             value=normalized_value,
                                             confidence=0.9,  # High confidence for World Bank data
-                                            timestamp=datetime.now(tz=UTC),
+                                            timestamp=datetime.now(tz=timezone.utc),
                                             region=self.region,
                                             metadata={
                                                 "source": "world_bank_api_direct",
@@ -359,7 +359,7 @@ class WealthInequalitySource(MaterialistDataSource):
                     indicator_name=indicator_name,
                     value=fallback_value,
                     confidence=0.5,  # Lower confidence for fallback data
-                    timestamp=datetime.now(tz=UTC),
+                    timestamp=datetime.now(tz=timezone.utc),
                     region=self.region,
                     metadata={
                         "source": "fallback_estimate",
@@ -444,7 +444,7 @@ class AlienationIndicatorsSource(MaterialistDataSource):
                 indicator_name="alienation_from_labor",
                 value=labor_alienation,
                 confidence=0.6,
-                timestamp=datetime.now(tz=UTC),
+                timestamp=datetime.now(tz=timezone.utc),
                 region=self.region,
                 metadata={"source": "workplace_surveys"},
             ))
@@ -456,7 +456,7 @@ class AlienationIndicatorsSource(MaterialistDataSource):
                 indicator_name="alienation_from_others",
                 value=social_alienation,
                 confidence=0.7,
-                timestamp=datetime.now(tz=UTC),
+                timestamp=datetime.now(tz=timezone.utc),
                 region=self.region,
                 metadata={"source": "social_surveys"},
             ))
@@ -468,7 +468,7 @@ class AlienationIndicatorsSource(MaterialistDataSource):
                 indicator_name="alienation_from_species",
                 value=species_alienation,
                 confidence=0.5,
-                timestamp=datetime.now(tz=UTC),
+                timestamp=datetime.now(tz=timezone.utc),
                 region=self.region,
                 metadata={"source": "community_surveys"},
             ))
@@ -581,7 +581,7 @@ class ConsciousnessIndicatorsSource(MaterialistDataSource):
                 indicator_name="political_mobilization",
                 value=political_mobilization,
                 confidence=0.7,
-                timestamp=datetime.now(tz=UTC),
+                timestamp=datetime.now(tz=timezone.utc),
                 region=self.region,
                 metadata={"source": "electoral_data"},
             ))
@@ -593,7 +593,7 @@ class ConsciousnessIndicatorsSource(MaterialistDataSource):
                 indicator_name="critical_consciousness",
                 value=critical_consciousness,
                 confidence=0.5,
-                timestamp=datetime.now(tz=UTC),
+                timestamp=datetime.now(tz=timezone.utc),
                 region=self.region,
                 metadata={"source": "education_surveys"},
             ))
@@ -605,7 +605,7 @@ class ConsciousnessIndicatorsSource(MaterialistDataSource):
                 indicator_name="collective_action_frequency",
                 value=collective_action,
                 confidence=0.6,
-                timestamp=datetime.now(tz=UTC),
+                timestamp=datetime.now(tz=timezone.utc),
                 region=self.region,
                 metadata={"source": "protest_tracker"},
             ))
@@ -841,7 +841,7 @@ class MaterialistDataManager:
             ideological_hegemony=gini,  # Higher inequality = stronger bourgeois hegemony
             state_repression=0.4,  # Could add political freedom indices
             mass_media_concentration=0.7,  # Could add media ownership data
-            timestamp=datetime.now(tz=UTC),
+            timestamp=datetime.now(tz=timezone.utc),
             region=self.region,
         )
 
@@ -852,7 +852,7 @@ class MaterialistDataManager:
         """Get current material conditions for the region using World Bank API."""
         # Check if we have recent data
         if (self.last_update and
-            datetime.now(tz=UTC) - self.last_update < timedelta(hours=6)):
+            datetime.now(tz=timezone.utc) - self.last_update < timedelta(hours=6)):
             cached = self.cache.get("material_conditions")
             if isinstance(cached, MaterialConditions):
                 logger.info("Using cached material conditions data")
@@ -871,7 +871,7 @@ class MaterialistDataManager:
 
         # Cache results
         self.cache["material_conditions"] = conditions
-        self.last_update = datetime.now(tz=UTC)
+        self.last_update = datetime.now(tz=timezone.utc)
 
         return conditions
 
